@@ -4,7 +4,9 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+#if !NETSTANDARD
 using System.Net.Configuration;
+#endif
 using System.Reflection;
 using System.Threading;
 using CSCore.Utils;
@@ -405,6 +407,7 @@ namespace CSCore.Codecs.MP3
         //Copied from http://social.msdn.microsoft.com/forums/en-US/netfxnetcom/thread/ff098248-551c-4da9-8ba5-358a9f8ccc57/
         private static bool SetAllowUnsafeHeaderParsing20()
         {
+#if !NETSTANDARD
             //Get the assembly that contains the internal class
             Assembly aNetAssembly = Assembly.GetAssembly(typeof (SettingsSection));
             if (aNetAssembly != null)
@@ -432,6 +435,7 @@ namespace CSCore.Codecs.MP3
                     }
                 }
             }
+#endif
             return false;
         }
     }
